@@ -1,0 +1,6 @@
+target/
+reports/
+*.class
+*.log
+.DS_Store
+playwright-framework/auth/state.json

@@ -1,0 +1,17 @@
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/base/BaseTest.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/confluence/ConfluenceClient.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/pages/MpsPage.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/email/EmailSender.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/pages/DataMaintenancePage.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/pages/NewSequenceLivePage.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/listeners/TestListener.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/base/BasePage.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/pages/HomePage.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/email/EmailBodyBuilder.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/confluence/ConfluencePageBuilder.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/confluence/TestCaseResult.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/confluence/ConfluenceReporter.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/config/ConfigReader.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/email/EmailReporter.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/confluence/TestSuiteResult.java
+/Users/d.sureshbabu/AutoSequencing/autoseq-tests/src/main/java/com/tvsm/autoseq/pages/LoginPage.java

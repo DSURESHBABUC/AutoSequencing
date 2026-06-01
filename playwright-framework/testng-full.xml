@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  testng-full.xml — runs ALL tests in a SINGLE browser session.
+
+  One <test> block = one browser opened once, shared across all 36 test methods.
+  Tests execute sequentially in priority order (1 → 36).
+
+  Run:  mvn test -DsuiteXmlFile=testng-full.xml
+-->
+<suite name="TVS AutoSeq — Full Suite (Single Browser)" verbose="1" preserve-order="true">
+
+    <listeners>
+        <listener class-name="com.tvsm.autoseq.listeners.TestListener"/>
+        <listener class-name="com.tvsm.autoseq.email.EmailReporter"/>
+    </listeners>
+
+    <test name="Full Suite — Login → Home → MPS → Data Maintenance"
+          preserve-order="true"
+          thread-count="1">
+
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+
+        <classes>
+            <class name="com.tvsm.autoseq.tests.FullSuiteTest"/>
+        </classes>
+
+    </test>
+
+</suite>

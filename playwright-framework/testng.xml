@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  ╔══════════════════════════════════════════════════════════════════════════╗
+  ║   TVS Playwright Automation — Master Suite                              ║
+  ║                                                                          ║
+  ║   Folder structure:                                                      ║
+  ║     tests/autoseq/  →  AutoSequencing  (uat-sns.tvsmotor.net/Autoseq)   ║
+  ║     tests/eyeq/     →  EyeQ            (uat-eyeq.tvsmotor.net)          ║
+  ║                                                                          ║
+  ║   Run full suite  : mvn test                                             ║
+  ║   Run AutoSeq only: mvn test -DsuiteXmlFile=testng-autoseq.xml          ║
+  ║   Run EyeQ only   : mvn test -DsuiteXmlFile=testng-eyeq.xml             ║
+  ╚══════════════════════════════════════════════════════════════════════════╝
+-->
+<suite name="TVS Playwright — Full Regression Suite" verbose="1">
+
+    <listeners>
+        <listener class-name="com.tvsm.autoseq.listeners.TestListener"/>
+        <listener class-name="com.tvsm.autoseq.confluence.ConfluenceReporter"/>
+        <listener class-name="com.tvsm.autoseq.email.EmailReporter"/>
+    </listeners>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         SUITE 1 — AutoSequencing  (uat-sns.tvsmotor.net/Autoseq)
+         Package: com.tvsm.autoseq.tests.autoseq
+         ════════════════════════════════════════════════════════════════════ -->
+
+    <test name="[AutoSeq] Login Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="[AutoSeq] New Sequence Live Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.NewSequenceLiveTest"/>
+        </classes>
+    </test>
+
+    <test name="[AutoSeq] Sequence Live Date and Search Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.SequenceLiveDateSearchTest"/>
+        </classes>
+    </test>
+
+    <test name="[AutoSeq] MPS Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.MpsTest"/>
+        </classes>
+    </test>
+
+    <test name="[AutoSeq] Data Maintenance Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.DataMaintenanceTest"/>
+        </classes>
+    </test>
+
+    <!-- ── Filter Tabs (All/Completed/Upcoming/Partial/InComplete) ──────── -->
+    <test name="[AutoSeq] Filter Tabs Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.FilterTabsTest"/>
+        </classes>
+    </test>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         SUITE 2 — Manual Sequencing (QAS)  (tvsmsrvrqas.tvsmotor.net)
+         Package: com.tvsm.autoseq.tests.manualseq
+         Run separately: mvn test -DsuiteXmlFile=testng-manualseq.xml
+         ════════════════════════════════════════════════════════════════════ -->
+
+    <test name="[ManualSeq] Login Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.manualseq.LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="[ManualSeq] Sequence Live Functional Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.manualseq.SequenceLivePageLoadTest"/>
+            <class name="com.tvsm.autoseq.tests.manualseq.FilterDropdownTest"/>
+            <class name="com.tvsm.autoseq.tests.manualseq.FilterTabsTest"/>
+            <class name="com.tvsm.autoseq.tests.manualseq.DateSearchTest"/>
+            <class name="com.tvsm.autoseq.tests.manualseq.SequenceLiveDataValidationTest"/>
+            <class name="com.tvsm.autoseq.tests.manualseq.SequenceLiveUIStabilityTest"/>
+        </classes>
+    </test>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         SUITE 3 — EyeQ  (uat-eyeq.tvsmotor.net)
+         Package: com.tvsm.autoseq.tests.eyeq
+         ════════════════════════════════════════════════════════════════════ -->
+
+    <test name="[EyeQ] Knowledge Graph 2.0 Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.eyeq.KnowledgeGraphTest"/>
+        </classes>
+    </test>
+
+</suite>
