@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="TVS AutoSeq — Date Search Email Run" verbose="1">
+
+    <listeners>
+        <listener class-name="com.tvsm.autoseq.listeners.TestListener"/>
+        <listener class-name="com.tvsm.autoseq.email.EmailReporter"/>
+    </listeners>
+
+    <test name="Sequence Live Date and Search Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.SequenceLiveDateSearchTest"/>
+        </classes>
+    </test>
+
+</suite>

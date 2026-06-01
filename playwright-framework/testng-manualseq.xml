@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  ╔══════════════════════════════════════════════════════════════════════════╗
+  ║   TVS Manual Sequencing (QAS) — Test Suite                              ║
+  ║                                                                          ║
+  ║   Application: https://tvsmsrvrqas.tvsmotor.net/SequencePlanTest        ║
+  ║   Package:     com.tvsm.autoseq.tests.manualseq                        ║
+  ║                                                                          ║
+  ║   Run: mvn test -DsuiteXmlFile=testng-manualseq.xml                     ║
+  ╚══════════════════════════════════════════════════════════════════════════╝
+-->
+<suite name="TVS Manual Sequencing (QAS) — Regression Suite" verbose="1">
+
+    <listeners>
+        <listener class-name="com.tvsm.autoseq.listeners.TestListener"/>
+        <listener class-name="com.tvsm.autoseq.confluence.ConfluenceReporter"/>
+        <listener class-name="com.tvsm.autoseq.email.EmailReporter"/>
+    </listeners>
+
+    <!-- ── Login Tests ──────────────────────────────────────────────────── -->
+    <test name="[ManualSeq] Login Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.manualseq.LoginTest"/>
+        </classes>
+    </test>
+
+    <!-- ── Page Load Tests ──────────────────────────────────────────────── -->
+    <test name="[ManualSeq] Sequence Live Page Load Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.manualseq.SequenceLivePageLoadTest"/>
+        </classes>
+    </test>
+
+    <!-- ── Filter Dropdown Tests ────────────────────────────────────────── -->
+    <test name="[ManualSeq] Filter Dropdown Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.manualseq.FilterDropdownTest"/>
+        </classes>
+    </test>
+
+    <!-- ── Filter Tabs Tests ────────────────────────────────────────────── -->
+    <test name="[ManualSeq] Filter Tabs Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.manualseq.FilterTabsTest"/>
+        </classes>
+    </test>
+
+    <!-- ── Date and Search Tests ────────────────────────────────────────── -->
+    <test name="[ManualSeq] Date and Search Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.manualseq.DateSearchTest"/>
+        </classes>
+    </test>
+
+    <!-- ── Search Functionality (JUPITER 110 NEW) ───────────────────────── -->
+    <test name="[ManualSeq] Search Functionality Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.manualseq.SearchFunctionalityTest"/>
+        </classes>
+    </test>
+
+    <!-- ── Data Validation Tests ────────────────────────────────────────── -->
+    <test name="[ManualSeq] Data Validation Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.manualseq.SequenceLiveDataValidationTest"/>
+        </classes>
+    </test>
+
+    <!-- ── Part Commitment Tests ────────────────────────────────────────── -->
+    <test name="[ManualSeq] Part Commitment Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.manualseq.PartCommitmentTest"/>
+        </classes>
+    </test>
+
+    <!-- ── UI Stability Tests ───────────────────────────────────────────── -->
+    <test name="[ManualSeq] UI Stability Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.manualseq.SequenceLiveUIStabilityTest"/>
+        </classes>
+    </test>
+
+</suite>

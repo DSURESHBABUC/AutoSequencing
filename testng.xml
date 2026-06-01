@@ -3,9 +3,6 @@
 <suite name="Suite">
 <listeners>
     <listener class-name="utils.SuiteListener"/>
-
-    <listener class-name="com.example.listeners.TestNgExecutionListener"/>
-
 </listeners>
   <test thread-count="5" name="Test">
       <parameter name="browser" value="chrome"/>

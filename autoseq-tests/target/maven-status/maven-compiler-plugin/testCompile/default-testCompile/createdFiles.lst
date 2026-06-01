@@ -1,0 +1,5 @@
+com/tvsm/autoseq/tests/LoginTest.class
+com/tvsm/autoseq/tests/NewSequenceLiveTest.class
+com/tvsm/autoseq/tests/SequenceLiveDateSearchTest.class
+com/tvsm/autoseq/tests/DataMaintenanceTest.class
+com/tvsm/autoseq/tests/MpsTest.class

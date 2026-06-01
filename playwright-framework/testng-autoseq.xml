@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  ╔══════════════════════════════════════════════════════════════════════╗
+  ║   TVS AutoSequencing (SNS) — Test Suite                             ║
+  ║   Application : https://uat-sns.tvsmotor.net/Autoseq                ║
+  ║   Package     : com.tvsm.autoseq.tests.autoseq                      ║
+  ║   Pages       : com.tvsm.autoseq.pages.autoseq                      ║
+  ║   Run with    : mvn test -DsuiteXmlFile=testng-autoseq.xml          ║
+  ╚══════════════════════════════════════════════════════════════════════╝
+-->
+<suite name="AutoSequencing Suite — uat-sns.tvsmotor.net" verbose="1">
+
+    <listeners>
+        <listener class-name="com.tvsm.autoseq.listeners.TestListener"/>
+        <listener class-name="com.tvsm.autoseq.confluence.ConfluenceReporter"/>
+        <listener class-name="com.tvsm.autoseq.email.EmailReporter"/>
+    </listeners>
+
+    <test name="[AutoSeq] Login Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="[AutoSeq] New Sequence Live Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.NewSequenceLiveTest"/>
+        </classes>
+    </test>
+
+    <test name="[AutoSeq] Sequence Live Date and Search Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.SequenceLiveDateSearchTest"/>
+        </classes>
+    </test>
+
+    <test name="[AutoSeq] MPS Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.MpsTest"/>
+        </classes>
+    </test>
+
+    <test name="[AutoSeq] Data Maintenance Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.DataMaintenanceTest"/>
+        </classes>
+    </test>
+
+    <!-- ── Filter Tabs (All/Completed/Upcoming/Partial/InComplete) ──────── -->
+    <test name="[AutoSeq] Filter Tabs Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.FilterTabsTest"/>
+        </classes>
+    </test>
+
+    <!-- ── Sequence Live Functional Checks ──────────────────────────────── -->
+    <test name="[AutoSeq] Sequence Live Functional Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.SequenceLiveFunctionalTest"/>
+        </classes>
+    </test>
+
+</suite>
