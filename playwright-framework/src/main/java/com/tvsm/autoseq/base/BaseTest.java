@@ -14,6 +14,9 @@ import org.testng.annotations.*;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -78,6 +81,15 @@ public class BaseTest {
     private void performLoginAndSaveState() {
         Path authFile = Paths.get(AUTH_STATE_PATH);
 
+        // ── Opt-out flag ─────────────────────────────────────────────────
+        // Skip the SNS SSO bootstrap entirely with -Dskip.sso=true.
+        // Useful when running QAS-only suites (e.g. manualseq) on networks
+        // that cannot reach uat-sns.tvsmotor.net.
+        if (Boolean.parseBoolean(System.getProperty("skip.sso", "false"))) {
+            System.out.println("⏭  Skipping SSO bootstrap (-Dskip.sso=true)");
+            return;
+        }
+
         // Re-use existing state if it's less than 8 hours old
         if (Files.exists(authFile)) {
             try {
@@ -88,6 +100,16 @@ public class BaseTest {
                     return;
                 }
             } catch (Exception ignored) {}
+        }
+
+        // ── Reachability probe ───────────────────────────────────────────
+        // If the SNS host is unreachable from this network, skip the
+        // bootstrap silently instead of emitting a noisy ERR_CONNECTION_REFUSED
+        // stack trace. Each test class still performs its own login.
+        if (!isHostReachable(ConfigReader.baseUrl(), 3000)) {
+            System.out.println("⏭  SSO host unreachable — skipping bootstrap "
+                    + "(host: " + extractHost(ConfigReader.baseUrl()) + ")");
+            return;
         }
 
         System.out.println("🔐 Performing SSO login to generate auth state...");
@@ -163,7 +185,13 @@ public class BaseTest {
             System.out.println("💾 Auth state saved to: " + AUTH_STATE_PATH);
 
         } catch (Exception e) {
-            System.out.println("⚠️  Auth state generation failed: " + e.getMessage());
+            // Trim multi-line Playwright stack to first line for readability.
+            String msg = e.getMessage();
+            if (msg != null) {
+                int nl = msg.indexOf('\n');
+                if (nl > 0) msg = msg.substring(0, nl);
+            }
+            System.out.println("⚠️  Auth state generation failed: " + msg);
             // Continue anyway — tests will attempt login themselves
         } finally {
             ctx.close();
@@ -326,5 +354,30 @@ public class BaseTest {
             } catch (Exception ignored) {}
         }
         System.out.println("⚠️  App load indicator not found — continuing anyway");
+    }
+
+    /**
+     * Quick TCP probe to decide whether to attempt the SSO bootstrap.
+     * Returns true if a TCP connection to host:port (443/80) succeeds
+     * within the timeout, false otherwise. Does not throw.
+     */
+    private boolean isHostReachable(String url, int timeoutMs) {
+        try {
+            URI uri = URI.create(url);
+            String host = uri.getHost();
+            if (host == null || host.isBlank()) return false;
+            int port = uri.getPort();
+            if (port == -1) port = "https".equalsIgnoreCase(uri.getScheme()) ? 443 : 80;
+            try (Socket s = new Socket()) {
+                s.connect(new InetSocketAddress(host, port), timeoutMs);
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private String extractHost(String url) {
+        try { return URI.create(url).getHost(); } catch (Exception e) { return url; }
     }
 }

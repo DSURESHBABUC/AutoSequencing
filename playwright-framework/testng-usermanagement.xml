@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  Run only the User Management automation tests (manualseq).
+
+  Usage:
+    mvn test -DsuiteXmlFile=testng-usermanagement.xml
+-->
+<suite name="ManualSeq — User Management Suite" verbose="1">
+
+    <listeners>
+        <listener class-name="com.tvsm.autoseq.listeners.TestListener"/>
+    </listeners>
+
+    <test name="[ManualSeq] User Management Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.manualseq.UserManagementTest"/>
+        </classes>
+    </test>
+
+</suite>

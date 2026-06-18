@@ -61,6 +61,13 @@ public class HomePage extends BasePage {
         return new DataMaintenancePage(page);
     }
 
+    /** Opens Report module → Variance Analysis. */
+    public VarianceAnalysisPage goToVarianceAnalysis() {
+        VarianceAnalysisPage variancePage = new VarianceAnalysisPage(page);
+        variancePage.openVarianceAnalysis();
+        return variancePage;
+    }
+
     public boolean isLoggedIn() {
         String[] indicators = {
             "app-root", ".mat-tab-label-content",

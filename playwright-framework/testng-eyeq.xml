@@ -2,27 +2,41 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <!--
-  ╔══════════════════════════════════════════════════════════════════════╗
-  ║   TVS EyeQ — Test Suite                                             ║
-  ║   Application : https://uat-eyeq.tvsmotor.net                      ║
-  ║   Package     : com.tvsm.autoseq.tests.eyeq                        ║
-  ║   Pages       : com.tvsm.autoseq.pages.eyeq                        ║
-  ║   Run with    : mvn test -DsuiteXmlFile=testng-eyeq.xml             ║
-  ╚══════════════════════════════════════════════════════════════════════╝
+  ╔══════════════════════════════════════════════════════════════════════════╗
+  ║   TVS EyeQ — Test Suite                                                ║
+  ║                                                                        ║
+  ║   Applications:                                                        ║
+  ║     • Knowledge Graph 2.0: https://uat-eyeq.tvsmotor.net/knowledgegraph2.0      ║
+  ║     • DVP Summary:         https://uat-eyeq.tvsmotor.net/knowledgegraphdvpsummary ║
+  ║                                                                        ║
+  ║   Package: com.tvsm.autoseq.tests.eyeq                                ║
+  ║                                                                        ║
+  ║   Run: mvn test -DsuiteXmlFile=testng-eyeq.xml                        ║
+  ╚══════════════════════════════════════════════════════════════════════════╝
 -->
-<suite name="EyeQ Suite — uat-eyeq.tvsmotor.net" verbose="1">
+
+<suite name="TVS EyeQ — Full Regression Suite" verbose="2" parallel="false">
 
     <listeners>
         <listener class-name="com.tvsm.autoseq.listeners.TestListener"/>
-        <listener class-name="com.tvsm.autoseq.confluence.ConfluenceReporter"/>
-        <listener class-name="com.tvsm.autoseq.email.EmailReporter"/>
+        <listener class-name="com.tvsm.autoseq.reports.PdfReporter"/>
     </listeners>
 
-    <test name="[EyeQ] Knowledge Graph 2.0 Tests" thread-count="1">
-        <parameter name="browser"  value="chromium"/>
+    <!-- ─── Knowledge Graph 2.0 ──────────────────────────────────────────── -->
+    <test name="[EyeQ] Knowledge Graph 2.0 Tests">
+        <parameter name="browser" value="chromium"/>
         <parameter name="headless" value="false"/>
         <classes>
             <class name="com.tvsm.autoseq.tests.eyeq.KnowledgeGraphTest"/>
+        </classes>
+    </test>
+
+    <!-- ─── DVP Summary ──────────────────────────────────────────────────── -->
+    <test name="[EyeQ] DVP Summary Tests">
+        <parameter name="browser" value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.eyeq.DvpSummaryTest"/>
         </classes>
     </test>
 
