@@ -178,7 +178,21 @@ public class ManualSeqSequenceLivePage extends BasePage {
                 Locator input = page.locator(sel).first();
                 input.click();
                 input.clear();
-                input.fill(keyword);
+                // Type character-by-character so that debounce/autocomplete handlers
+                // don't drop trailing characters as the DOM re-renders.
+                input.pressSequentially(keyword, new Locator.PressSequentiallyOptions().setDelay(80));
+                page.waitForTimeout(800);
+
+                // Verify the full value is present; if truncated, fall back to fill()
+                String actual = input.inputValue();
+                if (!keyword.equals(actual)) {
+                    System.out.println("⚠️  Typed value '" + actual + "' != expected '" + keyword + "'. Re-filling.");
+                    input.click();
+                    input.fill("");
+                    input.fill(keyword);
+                    input.dispatchEvent("input");
+                    page.waitForTimeout(500);
+                }
                 System.out.println("🔍 Searched: " + keyword);
                 return;
             }

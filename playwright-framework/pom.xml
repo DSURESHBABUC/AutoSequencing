@@ -18,7 +18,10 @@
         <playwright.version>1.44.0</playwright.version>
         <testng.version>7.10.2</testng.version>
         <extentreports.version>5.0.9</extentreports.version>
-        <slf4j.version>2.0.13</slf4j.version>
+        <!-- Pinned to 1.7.x: ships org.slf4j.impl.StaticLoggerBinder so libraries
+             still using the legacy 1.x binding lookup do not emit the
+             "Failed to load class StaticLoggerBinder" warning. -->
+        <slf4j.version>1.7.36</slf4j.version>
         <jackson.version>2.17.1</jackson.version>
         <surefire.version>3.2.5</surefire.version>
         <!-- Default suite — override with:
@@ -70,6 +73,14 @@
             <groupId>com.sun.mail</groupId>
             <artifactId>jakarta.mail</artifactId>
             <version>2.0.1</version>
+        </dependency>
+
+        <!-- iText 7 — PDF Report Generation -->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itext7-core</artifactId>
+            <version>7.2.5</version>
+            <type>pom</type>
         </dependency>
 
         <!-- SLF4J Logging -->

@@ -49,6 +49,10 @@ public class ConfigReader {
         return get("knowledgegraph.url", "https://uat-eyeq.tvsmotor.net/knowledgegraph2.0");
     }
 
+    public static String dvpSummaryUrl() {
+        return get("dvpsummary.url", "https://uat-eyeq.tvsmotor.net/knowledgegraphdvpsummary");
+    }
+
     // ── Manual Sequencing (QAS) ───────────────────────────────────────────
 
     public static String manualSeqBaseUrl() {
@@ -57,6 +61,10 @@ public class ConfigReader {
 
     public static String manualSeqGroupMasterUrl() {
         return get("manualseq.groupmaster.url", "https://tvsmsrvrqas.tvsmotor.net/SequencePlanTest/groupmaster");
+    }
+
+    public static String manualSeqHomeUrl() {
+        return get("manualseq.home.url", "https://tvsmsrvrqas.tvsmotor.net/SequencePlanTest/");
     }
 
     public static String browser() {

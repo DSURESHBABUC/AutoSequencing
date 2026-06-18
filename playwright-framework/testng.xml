@@ -20,6 +20,7 @@
         <listener class-name="com.tvsm.autoseq.listeners.TestListener"/>
         <listener class-name="com.tvsm.autoseq.confluence.ConfluenceReporter"/>
         <listener class-name="com.tvsm.autoseq.email.EmailReporter"/>
+        <listener class-name="com.tvsm.autoseq.reports.PdfReporter"/>
     </listeners>
 
     <!-- ════════════════════════════════════════════════════════════════════
@@ -76,6 +77,42 @@
         </classes>
     </test>
 
+    <!-- ── Notification Popup Navigation Tests ─────────────────────────── -->
+    <test name="[AutoSeq] Notification Popup Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.NotificationPopupTest"/>
+        </classes>
+    </test>
+
+    <!-- ── Search and Filter Status Tests ──────────────────────────────── -->
+    <test name="[AutoSeq] Search and Filter Status Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.SearchAndFilterStatusTest"/>
+        </classes>
+    </test>
+
+    <!-- ── Conveyor Hour Master Multi-Select Update Tests ──────────────── -->
+    <test name="[AutoSeq] Conveyor Hour Master Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.ConveyorHourMasterTest"/>
+        </classes>
+    </test>
+
+    <!-- ── Report → Variance Analysis Tests ────────────────────────────── -->
+    <test name="[AutoSeq] Variance Analysis Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.autoseq.VarianceAnalysisTest"/>
+        </classes>
+    </test>
+
     <!-- ════════════════════════════════════════════════════════════════════
          SUITE 2 — Manual Sequencing (QAS)  (tvsmsrvrqas.tvsmotor.net)
          Package: com.tvsm.autoseq.tests.manualseq
@@ -100,6 +137,15 @@
             <class name="com.tvsm.autoseq.tests.manualseq.DateSearchTest"/>
             <class name="com.tvsm.autoseq.tests.manualseq.SequenceLiveDataValidationTest"/>
             <class name="com.tvsm.autoseq.tests.manualseq.SequenceLiveUIStabilityTest"/>
+        </classes>
+    </test>
+
+    <!-- ── User Management (Manage Users screen) ─────────────────────────── -->
+    <test name="[ManualSeq] User Management Tests" thread-count="1">
+        <parameter name="browser"  value="chromium"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.tvsm.autoseq.tests.manualseq.UserManagementTest"/>
         </classes>
     </test>
 

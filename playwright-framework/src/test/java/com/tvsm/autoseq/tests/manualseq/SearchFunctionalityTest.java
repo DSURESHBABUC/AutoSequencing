@@ -2,6 +2,7 @@ package com.tvsm.autoseq.tests.manualseq;
 
 import com.tvsm.autoseq.base.BaseTest;
 import com.tvsm.autoseq.config.ConfigReader;
+import com.tvsm.autoseq.pages.manualseq.ManualSeqLoginPage;
 import com.tvsm.autoseq.pages.manualseq.ManualSeqSequenceLivePage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -37,12 +38,48 @@ public class SearchFunctionalityTest extends BaseTest {
 
     @BeforeClass(alwaysRun = true)
     public void navigateToGroupMaster() {
-        page.navigate(ConfigReader.manualSeqGroupMasterUrl());
-        waitForAppLoad();
+        // Always perform an explicit QAS login. The shared auth/state.json is for
+        // the SNS (uat-sns) domain and does NOT authenticate against tvsmsrvrqas (QAS).
+        ManualSeqLoginPage loginPage = new ManualSeqLoginPage(page);
+        try {
+            // Reuses auth/state.json when possible — only triggers Microsoft
+            // login (and 2FA) when the saved session is missing or expired.
+            loginPage.loginIfNeeded();
+            page.waitForTimeout(4000);
+            logInfo("✅ QAS login completed for: " + ConfigReader.username());
+        } catch (Exception e) {
+            logInfo("ℹ️  QAS login flow exception (continuing): " + e.getMessage());
+        }
+
+        // Navigate to Group Master with retry to handle transient ERR_ABORTED
+        // during in-flight SSO redirects.
+        navigateWithRetry(ConfigReader.manualSeqGroupMasterUrl(), 3);
+
+        try {
+            waitForAppLoad();
+        } catch (Exception ignored) {}
         page.waitForTimeout(3000);
+
         seqPage = new ManualSeqSequenceLivePage(page);
         seqPage.dismissSwalIfPresent();
         logInfo("Navigated to: " + ConfigReader.manualSeqGroupMasterUrl());
+    }
+
+    /** Navigate with retry to handle transient ERR_ABORTED during SSO redirect chains. */
+    private void navigateWithRetry(String url, int maxAttempts) {
+        for (int i = 1; i <= maxAttempts; i++) {
+            try {
+                page.navigate(url);
+                return;
+            } catch (Exception e) {
+                logInfo("Navigation attempt " + i + " failed: " + e.getMessage());
+                if (i == maxAttempts) {
+                    logInfo("⚠️  All navigation attempts failed — continuing with current URL");
+                    return;
+                }
+                try { page.waitForTimeout(2000); } catch (Exception ignored) {}
+            }
+        }
     }
 
     // ─────────────────────────────────────────────────────────────────────
